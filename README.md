@@ -26,7 +26,6 @@ Career Compass leverages modern full-stack technologies and AI models to provide
 ### 🔜 Frontend (Next.js with TypeScript)
 
 * **Next.js 14+**
-* **Shadcn/UI** components
 * **Axios** (API calls)
 * **React Hooks**
 * **TailwindCSS** (styling)
