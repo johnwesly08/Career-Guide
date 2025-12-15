@@ -1,0 +1,54 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.egg-info/
+.eggs/
+*.so
+
+# ---- Virtual Environment ----
+venv/
+.env
+.venv/
+env/
+ENV/
+
+# ---- Environment Variables ----
+*.env
+.env.*
+!example.env
+
+# ---- Pip / Poetry / Pipenv ----
+pip-wheel-metadata/
+poetry.lock
+Pipfile.lock
+
+# ---- Build / Distribution ----
+build/
+dist/
+*.egg
+*.whl
+
+# ---- Byte-compiled / Cache ----
+.cache/
+.pytest_cache/
+mypy_cache/
+pytestdebug.log
+
+# ---- IDEs / Editors ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- Logs ----
+logs/
+*.log
+
+# ---- FastAPI / Uvicorn ----
+# (Uvicorn may generate reload artifacts)
+reload.*
+
+firebase-service-account.json
