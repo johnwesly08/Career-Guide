@@ -464,7 +464,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Team
 
-**Mr. Wesly** - *Engineering, Architecture & Deployment Lead*
+**JOHN WESLY P D** - *Engineering, Architecture & Deployment Lead*
 
 ---
 
