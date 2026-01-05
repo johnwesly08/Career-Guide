@@ -7,3 +7,5 @@ pdfplumber
 docx2txt
 langchain-huggingface
 sentence-transformers
+langchain-community
+python-multipart
