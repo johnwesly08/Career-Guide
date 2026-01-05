@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Career Compass",
-  description: "Your Personal Career Guide",
+  description: "Career Compass is an AI-powered career guidance platform that analyzes resumes against job descriptions, identifies skill gaps, calculates match scores, and provides personalized career insights using modern web and AI technologies.",
   icons: {
     icon: "/favicon.png",
   },
