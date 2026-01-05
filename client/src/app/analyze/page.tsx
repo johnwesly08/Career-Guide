@@ -226,22 +226,34 @@ export default function AnalyzePage() {
 
                   {/* Matching SKills */}
                   {result.matchingSkills?.length > 0 && (
-                  <div className="bg-white dark:bg-slate-900 border rounded-2xl p-6">
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
-                          Matching Skills
-                        </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {result.matchingSkills.map((skill: string, idx: number) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 rounded-lg text-sm"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
+  <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+    <div className="flex items-center gap-2 mb-4">
+      <CheckCircle className="w-5 h-5 text-green-600" />
+      <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+        Matching Skills
+      </h3>
+    </div>
+
+    <div className="flex flex-wrap gap-2">
+      {result.matchingSkills.map((skill: string, idx: number) => (
+        <span
+          key={idx}
+          className="
+            px-3 py-1.5
+            bg-green-100 dark:bg-green-900/30
+            text-green-700 dark:text-green-300
+            rounded-lg
+            text-sm font-medium
+            border border-green-200 dark:border-green-800
+          "
+        >
+          {skill}
+        </span>
+      ))}
+    </div>
+  </div>
+)}
+
 
                   {/* Strengths */}
                   {result.strengths && result.strengths.length > 0 && (
@@ -305,6 +317,21 @@ export default function AnalyzePage() {
                     </div>
                   )}
 
+                  {result.feedback && (
+  <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+    <div className="flex items-center gap-2 mb-4">
+      <Sparkles className="w-5 h-5 text-indigo-600" />
+      <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+        Overall Summary
+      </h3>
+    </div>
+
+    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed text-justify">
+      {result.feedback}
+    </p>
+  </div>
+)}
+
                   {/* Reset Button */}
                   <button
                     onClick={() => {
@@ -312,7 +339,7 @@ export default function AnalyzePage() {
                       setResumeFile(null);
                       setJobDescription('');
                     }}
-                    className="w-full px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
+                    className="w-full px-6 py-3 bg-slate-300 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl font-semibold hover:bg-slate-500 dark:hover:bg-slate-700 transition-all"
                   >
                     Start New Analysis
                   </button>
