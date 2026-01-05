@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { AuthProvider } from "@/context/AuthContext";
+import Footer from "@/components/layout/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,21 +18,37 @@ export const metadata: Metadata = {
   title: "Career Compass",
   description: "Your Personal Career Guide",
   icons: {
-    icon: '/favicon.png', 
+    icon: "/favicon.png",
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      > 
-      <AuthProvider>{children}</AuthProvider>
+        className={`
+          ${geistSans.variable}
+          ${geistMono.variable}
+          antialiased
+          flex
+          min-h-screen
+          flex-col
+        `}
+      >
+        {/* App content */}
+        <AuthProvider>
+          <main className="flex-1 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+            {children}
+          </main>
+
+        </AuthProvider>
+
+        {/* Footer always at bottom */}
+        <Footer />
       </body>
     </html>
   );
