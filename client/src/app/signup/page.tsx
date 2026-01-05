@@ -1,9 +1,9 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Sparkles, Mail, Lock, User, ArrowRight, Brain, CheckCircle, AlertCircle } from 'lucide-react';
+import { Sparkles, Mail, Lock, User, ArrowRight, CheckCircle, AlertCircle, Target } from 'lucide-react';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
-import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 
@@ -74,35 +74,6 @@ export default function SignupPage() {
     }
   };
 
-  const handleGoogleSignUp = async () => {
-    setError('');
-    setLoading(true);
-    const provider = new GoogleAuthProvider();
-
-    try {
-      await signInWithPopup(auth, provider);
-      router.push('/');
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign up with Google.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleGithubSignUp = async () => {
-    setError('');
-    setLoading(true);
-    const provider = new GithubAuthProvider();
-
-    try {
-      await signInWithPopup(auth, provider);
-      router.push('/');
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign up with GitHub.');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <ThemeProvider>
@@ -111,8 +82,8 @@ export default function SignupPage() {
           {/* Left Side - Branding & Benefits */}
           <div className="hidden lg:block">
             <Link href="/" className="inline-flex items-center gap-2 mb-8">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
-                <Brain className="w-7 h-7 text-white" />
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg">
+                <Target className="w-7 h-7 text-white" />
               </div>
               <span className="text-2xl font-bold text-slate-900 dark:text-slate-100">Career Compass</span>
             </Link>
@@ -158,8 +129,8 @@ export default function SignupPage() {
             {/* Mobile Logo */}
             <div className="lg:hidden text-center mb-8">
               <Link href="/" className="inline-flex items-center gap-2 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
-                  <Brain className="w-7 h-7 text-white" />
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg">
+                  <Target className="w-7 h-7 text-white" />
                 </div>
                 <span className="text-2xl font-bold text-slate-900 dark:text-slate-100">Career Compass</span>
               </Link>
@@ -308,34 +279,7 @@ export default function SignupPage() {
                 </button>
               </form>
 
-              {/* Divider */}
-              <div className="relative my-6">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-slate-200 dark:border-slate-800"></div>
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-4 bg-white dark:bg-slate-900 text-slate-500">Or sign up with</span>
-                </div>
-              </div>
-
-              {/* Social Signup */}
-              <div className="grid grid-cols-2 gap-4">
-                <button 
-                  onClick={handleGoogleSignUp}
-                  disabled={loading}
-                  className="px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-750 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Google
-                </button>
-                <button 
-                  onClick={handleGithubSignUp}
-                  disabled={loading}
-                  className="px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-750 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  GitHub
-                </button>
-              </div>
-
+              
               {/* Login Link */}
               <p className="text-center text-sm text-slate-600 dark:text-slate-400 mt-6">
                 Already have an account?{' '}
