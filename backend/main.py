@@ -1,5 +1,6 @@
 import sys
 import os
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -8,6 +9,10 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Import router from api.routes
 from api.routes import router
+
+
+load_dotenv()
+
 
 app = FastAPI(
     title="Career Compass API",
