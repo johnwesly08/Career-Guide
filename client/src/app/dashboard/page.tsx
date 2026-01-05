@@ -1,7 +1,7 @@
 'use client';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '@/components/layout/Header';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import Link from 'next/link';
@@ -19,11 +19,42 @@ export default function DashboardPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
 
+  const [stats, setStats] = useState<{
+  jobsAnalyzed: number;
+  chatCount: number;
+  averageScore: number | '--';
+}>({
+  jobsAnalyzed: 0,
+  chatCount: 0,
+  averageScore: '--',
+});
+
+
   useEffect(() => {
     if (!loading && !user) {
       router.push('/login');
     }
   }, [user, loading, router]);
+
+  useEffect(() => {
+  if (!user) return;
+
+  fetch(`http://localhost:8000/api/v1/dashboard/${user.uid}`)
+    .then(res => res.json())
+    .then(data => {
+      setStats({
+        jobsAnalyzed: data.jobsAnalyzed ?? 0,
+        chatCount: data.chatCount ?? 0,
+        averageScore: data.averageScore ?? '--',
+      });
+    })
+    .catch(err => {
+      console.error('Failed to fetch dashboard stats:', err);
+    });
+}, [user]);
+
+
+  
 
   if (loading) {
     return (
@@ -114,8 +145,9 @@ export default function DashboardPage() {
                 </span>
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-1">
-                0
-              </div>
+  {stats.jobsAnalyzed}
+</div>
+
               <div className="text-sm text-slate-600 dark:text-slate-400">
                 Jobs Analyzed
               </div>
@@ -129,8 +161,9 @@ export default function DashboardPage() {
                 </span>
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-1">
-                0
-              </div>
+  {stats.chatCount}
+</div>
+
               <div className="text-sm text-slate-600 dark:text-slate-400">
                 Chat Conversations
               </div>
@@ -144,8 +177,9 @@ export default function DashboardPage() {
                 </span>
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-1">
-                --
-              </div>
+  {stats.averageScore}
+</div>
+
               <div className="text-sm text-slate-600 dark:text-slate-400">
                 Match Score
               </div>

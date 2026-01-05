@@ -43,6 +43,10 @@ export default function ChatPage() {
   }, [messages]);
 
   const handleSend = async () => {
+    if(!user) {
+      alert('User not authenticated');
+      return
+    }
     if (!input.trim() || isTyping) return;
 
     const userMessage: Message = {
@@ -62,7 +66,7 @@ export default function ChatPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: userMessage.content }),
+        body: JSON.stringify({ message: userMessage.content, user_id: user.uid }),
       });
 
       if (!response.ok) {

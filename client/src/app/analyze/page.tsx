@@ -41,6 +41,11 @@ export default function AnalyzePage() {
   };
 
   const handleAnalyze = async () => {
+    if(!user) {
+      alert('User not authenticated');
+      return
+    }
+
     if (!resumeFile || !jobDescription.trim()) {
       alert('Please upload your resume and add a job description');
       return;
@@ -52,7 +57,8 @@ export default function AnalyzePage() {
       const formData = new FormData();
       formData.append('resume', resumeFile);
       formData.append('job_desc', jobDescription);
-      
+      formData.append('user_id', user.uid);
+            
       const response = await fetch('http://localhost:8000/api/v1/analyze', {
         method: 'POST',
         body: formData,
