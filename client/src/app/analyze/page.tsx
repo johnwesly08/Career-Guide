@@ -72,6 +72,12 @@ export default function AnalyzePage() {
     }
   };
 
+  // ✅ SAFE, NORMALIZED SCORE FOR UI
+  const overallScore =
+    typeof result?.overallScore === 'number'
+      ? Math.min(Math.max(result.overallScore, 0), 100)
+      : null;
+
   if (loading) {
     return (
       <ThemeProvider>
@@ -80,7 +86,7 @@ export default function AnalyzePage() {
         </div>
       </ThemeProvider>
     );
-  }
+  }  
 
   if (!user) return null;
 
@@ -195,14 +201,20 @@ export default function AnalyzePage() {
                       <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-2">
                         Your Match Score
                       </p>
-                      <div className="text-6xl font-bold text-slate-900 dark:text-slate-100 mb-2">
-                        {result.matchScore || result.match_score || 'N/A'}/10
+                      {/* SCORE */}
+                      <div className="flex items-end justify-center gap-2 mb-2">
+                        <div className="text-6xl font-bold text-slate-900 dark:text-slate-100">
+                          {overallScore !== null ? overallScore : 'N/A'}
+                        </div>
+                        <div className="text-sm text-slate-500 mb-2">/ 100</div>
                       </div>
+
+                      {/* PROGRESS BAR */}
                       <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-3">
                         <div
                           className="bg-gradient-to-r from-indigo-600 to-purple-600 h-3 rounded-full transition-all"
-                          style={{ width: `${(result.matchScore || result.match_score || 0) * 10}%` }}
-                        ></div>
+                          style={{ width: `${overallScore ?? 0}%` }}
+                        />
                       </div>
                     </div>
                     <p className="text-sm text-slate-600 dark:text-slate-400 text-center">
@@ -211,6 +223,25 @@ export default function AnalyzePage() {
                         : 'Consider developing skills to better match this role.'}
                     </p>
                   </div>
+
+                  {/* Matching SKills */}
+                  {result.matchingSkills?.length > 0 && (
+                  <div className="bg-white dark:bg-slate-900 border rounded-2xl p-6">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                          Matching Skills
+                        </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {result.matchingSkills.map((skill: string, idx: number) => (
+                        <span
+                          key={idx}
+                          className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 rounded-lg text-sm"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                   {/* Strengths */}
                   {result.strengths && result.strengths.length > 0 && (
@@ -233,7 +264,7 @@ export default function AnalyzePage() {
                   )}
 
                   {/* Skill Gaps */}
-                  {result.gaps && result.gaps.length > 0 && (
+                  {result.missingSkills && result.missingSkills.length > 0 && (
                     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-4">
                         <AlertTriangle className="w-5 h-5 text-amber-600" />
@@ -242,7 +273,7 @@ export default function AnalyzePage() {
                         </h3>
                       </div>
                       <ul className="space-y-3">
-                        {result.gaps.map((gap: string, idx: number) => (
+                        {result.missingSkills.map((gap: string, idx: number) => (
                           <li key={idx} className="flex items-start gap-3">
                             <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                             <p className="text-sm text-slate-700 dark:text-slate-300">{gap}</p>
@@ -253,16 +284,16 @@ export default function AnalyzePage() {
                   )}
 
                   {/* Recommendations */}
-                  {result.recommendations && result.recommendations.length > 0 && (
+                  {result.improvements && result.improvements.length > 0 && (
                     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-4">
                         <Sparkles className="w-5 h-5 text-indigo-600" />
                         <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
-                          Recommendations
+                          Improvements
                         </h3>
                       </div>
                       <ul className="space-y-3">
-                        {result.recommendations.map((rec: string, idx: number) => (
+                        {result.improvements.map((rec: string, idx: number) => (
                           <li key={idx} className="flex items-start gap-3">
                             <div className="w-6 h-6 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
                               <span className="text-xs font-bold text-indigo-600">{idx + 1}</span>
