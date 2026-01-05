@@ -1,0 +1,9 @@
+langchain-groq
+python-dotenv
+fastapi
+uvicorn
+firebase-admin
+pdfplumber
+docx2txt
+langchain-huggingface
+sentence-transformers
