@@ -145,8 +145,8 @@ export default function DashboardPage() {
                 </span>
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-1">
-  {stats.jobsAnalyzed}
-</div>
+                {stats.jobsAnalyzed}
+              </div>
 
               <div className="text-sm text-slate-600 dark:text-slate-400">
                 Jobs Analyzed
@@ -161,8 +161,8 @@ export default function DashboardPage() {
                 </span>
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-1">
-  {stats.chatCount}
-</div>
+                {stats.chatCount}
+              </div>
 
               <div className="text-sm text-slate-600 dark:text-slate-400">
                 Chat Conversations
@@ -177,8 +177,8 @@ export default function DashboardPage() {
                 </span>
               </div>
               <div className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-1">
-  {stats.averageScore}
-</div>
+                {stats.averageScore}
+              </div>
 
               <div className="text-sm text-slate-600 dark:text-slate-400">
                 Match Score
